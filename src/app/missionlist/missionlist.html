@@ -1,0 +1,84 @@
+<mat-card class="list-shell">
+  <mat-card-header>
+    <div>
+      <mat-card-title>Mission List</mat-card-title>
+      <mat-card-subtitle>
+        Browse SpaceX launches{{ selectedYear ? ' from ' + selectedYear : '' }}.
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <app-missionfilter (yearSelected)="onYearSelected($event)"></app-missionfilter>
+
+    <div *ngIf="isLoading" class="state-block">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading SpaceX launches...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="state-block">
+      <p>{{ errorMessage }}</p>
+      <button mat-stroked-button color="primary" type="button" (click)="retryLoad()">
+        Retry
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage" class="mission-grid">
+      <p *ngIf="missions.length === 0" class="empty-state">
+        No launches found{{ selectedYear ? ' for ' + selectedYear : '' }}.
+      </p>
+
+      <mat-card
+        *ngFor="let mission of missions; trackBy: trackByFlightNumber"
+        appearance="outlined"
+        class="mission-card"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="mission-avatar">
+            <img
+              *ngIf="mission.mission_patch_small"
+              [src]="mission.mission_patch_small"
+              [alt]="mission.mission_name"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+          <mat-card-subtitle>
+            Flight #{{ mission.flight_number }} | {{ mission.launch_year }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Rocket:</strong> {{ mission.rocket_name }}</p>
+          <p><strong>Type:</strong> {{ mission.rocket_type }}</p>
+          <p class="details-text">
+            {{ mission.details || 'No mission details available.' }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <a
+            mat-button
+            color="primary"
+            [routerLink]="['/missions', mission.flight_number]"
+            [queryParams]="{
+              missionName: mission.mission_name,
+              launchYear: mission.launch_year
+            }"
+          >
+            Details
+          </a>
+          <a *ngIf="mission.article_link" mat-button [href]="mission.article_link" target="_blank" rel="noopener">
+            Article
+          </a>
+          <a *ngIf="mission.wikipedia" mat-button [href]="mission.wikipedia" target="_blank" rel="noopener">
+            Wikipedia
+          </a>
+          <a *ngIf="mission.video_link" mat-button [href]="mission.video_link" target="_blank" rel="noopener">
+            Video
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>

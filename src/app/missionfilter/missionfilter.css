@@ -1,0 +1,16 @@
+.filter-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.filter-field {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .filter-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

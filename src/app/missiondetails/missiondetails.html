@@ -1,0 +1,64 @@
+<mat-card class="details-shell">
+  <mat-card-header>
+    <div>
+      <mat-card-title>Mission Details</mat-card-title>
+      <mat-card-subtitle *ngIf="mission">
+        Flight #{{ mission.flight_number }}
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="details-actions">
+      <button mat-stroked-button color="primary" type="button" (click)="goBack()">
+        Back
+      </button>
+    </div>
+
+    <div *ngIf="isLoading" class="state-block">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading mission details...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="state-block">
+      <p>{{ errorMessage }}</p>
+      <button mat-stroked-button color="primary" type="button" (click)="retryLoad()">
+        Retry
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && mission" class="details-layout">
+      <div class="mission-patch" *ngIf="mission.mission_patch_small">
+        <img
+          [src]="mission.mission_patch_small"
+          [alt]="mission.mission_name"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="mission-patch mission-patch-fallback" *ngIf="!mission.mission_patch_small">
+        {{ mission.mission_name }}
+      </div>
+
+      <div class="details-copy">
+        <h2>{{ mission.mission_name }}</h2>
+        <p><strong>Flight Number:</strong> {{ mission.flight_number }}</p>
+        <p><strong>Launch Year:</strong> {{ mission.launch_year }}</p>
+        <p><strong>Rocket Name:</strong> {{ mission.rocket_name }}</p>
+        <p><strong>Rocket Type:</strong> {{ mission.rocket_type }}</p>
+        <p><strong>Details:</strong> {{ mission.details || 'No mission details available.' }}</p>
+
+        <div class="link-group">
+          <a *ngIf="mission.article_link" mat-button [href]="mission.article_link" target="_blank" rel="noopener">
+            Article
+          </a>
+          <a *ngIf="mission.wikipedia" mat-button [href]="mission.wikipedia" target="_blank" rel="noopener">
+            Wikipedia
+          </a>
+          <a *ngIf="mission.video_link" mat-button [href]="mission.video_link" target="_blank" rel="noopener">
+            Video
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

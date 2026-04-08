@@ -1,0 +1,84 @@
+# Dependencies
+node_modules/
+
+# Build and Angular output
+dist/
+out-tsc/
+.angular/
+.angular/cache/
+tmp/
+temp/
+cache/
+.cache/
+bazel-out/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Test and coverage output
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+__screenshots__/
+
+# Environment and local config
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# TypeScript and misc generated files
+*.tsbuildinfo
+typings/
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+
+# IDE and editor files
+.idea/
+.fleet/
+.project
+.classpath
+.settings/
+.c9/
+*.launch
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.history/
+.vscode/
+
+# OS files
+.DS_Store
+.DS_Store?
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Archives and local exports
+*.tgz
+*.zip
+
+# Codex and agent tooling
+.codex/
+.codex-*/
+.agents/
+
+# MCP and local tool state
+.mcp/
+
+# Optional local hosting / deployment artifacts
+.vercel/
+.netlify/
+.wrangler/
+.firebase/
+

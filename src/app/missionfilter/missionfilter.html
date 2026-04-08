@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Mission Filter</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="filter-actions">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Launch Year</mat-label>
+        <mat-select [formControl]="launchYearControl">
+          <mat-option value="">All launches</mat-option>
+          <mat-option *ngFor="let year of launchYears" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="resetFilter()"
+      >
+        Reset
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
