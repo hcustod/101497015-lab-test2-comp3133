@@ -3,14 +3,17 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
 
+import { provideHttpClient } from '@angular/common/http';
 import { SpacexapiService } from './spacexapi.service';
 
+// Tests for SpacexapiService
+// Simpler than just having to click through the gui each time
 describe('SpacexapiService', () => {
   let service: SpacexapiService;
   let httpTestingController: HttpTestingController;
 
+  // Setup of testing http module 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
@@ -20,10 +23,12 @@ describe('SpacexapiService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
+  // verify no requests after tests
   afterEach(() => {
     httpTestingController.verify();
   });
 
+  // Test service created 
   it('should map SpaceX launch data into the Mission interface', () => {
     let result: unknown;
 
@@ -35,6 +40,7 @@ describe('SpacexapiService', () => {
       'https://api.spacexdata.com/v3/launches',
     );
 
+    // Mock API response
     request.flush([
       {
         flight_number: 1,
@@ -54,6 +60,7 @@ describe('SpacexapiService', () => {
       },
     ]);
 
+    // EXPECTED result after mapping
     expect(result).toEqual([
       {
         flight_number: 1,
@@ -70,6 +77,7 @@ describe('SpacexapiService', () => {
     ]);
   });
 
+  // Test for duplicate flight numbers
   it('should resolve the correct mission when flight numbers are duplicated', () => {
     let result: unknown;
 
@@ -83,6 +91,7 @@ describe('SpacexapiService', () => {
       'https://api.spacexdata.com/v3/launches',
     );
 
+    // Mock API response
     request.flush([
       {
         flight_number: 110,
@@ -118,6 +127,7 @@ describe('SpacexapiService', () => {
       },
     ]);
 
+    // EXPECTED results
     expect(result).toEqual({
       flight_number: 110,
       mission_name: 'SXM-7',

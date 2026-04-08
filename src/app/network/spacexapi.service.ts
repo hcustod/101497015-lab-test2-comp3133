@@ -4,6 +4,7 @@ import { map, Observable, shareReplay, timeout } from 'rxjs';
 
 import { Mission } from '../models/mission';
 
+// Define permanent interface for interacting with SpaceX API
 interface SpaceXLaunchResponse {
   flight_number: number;
   mission_name: string;
@@ -21,14 +22,18 @@ interface SpaceXLaunchResponse {
   };
 }
 
+// Service for interacting with SpaceX API
 @Injectable({
   providedIn: 'root',
 })
+
+// Class def 
 export class SpacexapiService {
   private readonly apiUrl = 'https://api.spacexdata.com/v3/launches';
   private readonly requestTimeoutMs = 10000;
   private readonly launches$: Observable<Mission[]>;
 
+  // Constructor
   constructor(private readonly http: HttpClient) {
     this.launches$ = this.http
       .get<SpaceXLaunchResponse[]>(this.apiUrl)
@@ -39,10 +44,12 @@ export class SpacexapiService {
       );
   }
 
+  // Get all launches
   getAllLaunches(): Observable<Mission[]> {
     return this.launches$;
   }
 
+  // Get launches by year
   getLaunchesByYear(year: string): Observable<Mission[]> {
     return this.launches$.pipe(
       map((launches) =>
@@ -51,15 +58,18 @@ export class SpacexapiService {
     );
   }
 
+  // Get launch by flight num, option for mission name and launch year
   getLaunchByFlightNumber(
     flightNumber: number,
     missionName?: string | null,
     launchYear?: string | null,
   ): Observable<Mission> {
+    // filtered return
     return this.launches$.pipe(
       map((launches) =>
         launches.filter((launch) => launch.flight_number === flightNumber),
       ),
+      // If mission name or launch year provided, find matching launch
       map((matchingLaunches) => {
         const matchingLaunch =
           matchingLaunches.find(
@@ -77,6 +87,7 @@ export class SpacexapiService {
     );
   }
 
+  // Mapping of API response to gui
   private mapLaunch(launch: SpaceXLaunchResponse): Mission {
     return {
       flight_number: launch.flight_number,

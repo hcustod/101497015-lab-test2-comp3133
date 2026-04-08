@@ -10,11 +10,13 @@
   <mat-card-content>
     <app-missionfilter (yearSelected)="onYearSelected($event)"></app-missionfilter>
 
+    // Loading
     <div *ngIf="isLoading" class="state-block">
       <mat-spinner diameter="40"></mat-spinner>
       <p>Loading SpaceX launches...</p>
     </div>
 
+    // Loading error
     <div *ngIf="!isLoading && errorMessage" class="state-block">
       <p>{{ errorMessage }}</p>
       <button mat-stroked-button color="primary" type="button" (click)="retryLoad()">
@@ -22,16 +24,19 @@
       </button>
     </div>
 
+    // Mission list error
     <div *ngIf="!isLoading && !errorMessage" class="mission-grid">
       <p *ngIf="missions.length === 0" class="empty-state">
         No launches found{{ selectedYear ? ' for ' + selectedYear : '' }}.
       </p>
 
+      // Mission cards
       <mat-card
         *ngFor="let mission of missions; trackBy: trackByFlightNumber"
         appearance="outlined"
         class="mission-card"
       >
+        // Mission card header and avatar
         <mat-card-header>
           <div mat-card-avatar class="mission-avatar">
             <img
@@ -42,12 +47,14 @@
               decoding="async"
             />
           </div>
+          // Mission name and subtitle
           <mat-card-title>{{ mission.mission_name }}</mat-card-title>
           <mat-card-subtitle>
             Flight #{{ mission.flight_number }} | {{ mission.launch_year }}
           </mat-card-subtitle>
         </mat-card-header>
 
+        // Mission details and links
         <mat-card-content>
           <p><strong>Rocket:</strong> {{ mission.rocket_name }}</p>
           <p><strong>Type:</strong> {{ mission.rocket_type }}</p>

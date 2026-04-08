@@ -20,8 +20,8 @@ import { Missiondetails } from './missiondetails/missiondetails';
   declarations: [App, Missionlist, Missionfilter, Missiondetails],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    BrowserAnimationsModule,  // deprecated? 
+    HttpClientModule,         //deprecated?
     ReactiveFormsModule,
     AppRoutingModule,
     MatButtonModule,

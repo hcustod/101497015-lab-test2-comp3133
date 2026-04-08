@@ -7,6 +7,8 @@
       </mat-card-subtitle>
     </div>
   </mat-card-header>
+
+  // Start of content
   <mat-card-content>
     <div class="details-actions">
       <button mat-stroked-button color="primary" type="button" (click)="goBack()">
@@ -14,11 +16,13 @@
       </button>
     </div>
 
+    // Loading spinner
     <div *ngIf="isLoading" class="state-block">
       <mat-spinner diameter="40"></mat-spinner>
       <p>Loading mission details...</p>
     </div>
 
+    // Error loading
     <div *ngIf="!isLoading && errorMessage" class="state-block">
       <p>{{ errorMessage }}</p>
       <button mat-stroked-button color="primary" type="button" (click)="retryLoad()">
@@ -26,6 +30,7 @@
       </button>
     </div>
 
+    // Mission details
     <div *ngIf="!isLoading && mission" class="details-layout">
       <div class="mission-patch" *ngIf="mission.mission_patch_small">
         <img
@@ -39,6 +44,7 @@
         {{ mission.mission_name }}
       </div>
 
+      // Mission details text and links
       <div class="details-copy">
         <h2>{{ mission.mission_name }}</h2>
         <p><strong>Flight Number:</strong> {{ mission.flight_number }}</p>

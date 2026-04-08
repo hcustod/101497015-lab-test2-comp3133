@@ -12,6 +12,8 @@ import { SpacexapiService } from '../network/spacexapi.service';
   templateUrl: './missiondetails.html',
   styleUrl: './missiondetails.css',
 })
+
+// Mission details component start
 export class Missiondetails implements OnInit {
   mission: Mission | null = null;
   isLoading = true;
@@ -20,6 +22,7 @@ export class Missiondetails implements OnInit {
   private currentMissionName: string | null = null;
   private currentLaunchYear: string | null = null;
 
+  // ActivatedRoute, SpacexapiService, Location, Router, ChangeDetectorRef
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly spacexapiService: SpacexapiService,
@@ -28,6 +31,7 @@ export class Missiondetails implements OnInit {
     private readonly changeDetectorRef: ChangeDetectorRef,
   ) {}
 
+  // On init load mission details
   ngOnInit(): void {
     combineLatest([
       this.activatedRoute.paramMap,
@@ -49,6 +53,7 @@ export class Missiondetails implements OnInit {
     });
   }
 
+  // Back to previous page
   goBack(): void {
     if (window.history.length > 1) {
       this.location.back();
@@ -58,30 +63,33 @@ export class Missiondetails implements OnInit {
     void this.router.navigate(['/missions']);
   }
 
+  // Retry loading mission details
   retryLoad(): void {
     if (this.currentFlightNumber) {
       this.loadMissionDetails(this.currentFlightNumber);
     }
   }
 
+  // Load mission details based on flight number and optional query params
   private loadMissionDetails(flightNumber: number): void {
     this.isLoading = true;
     this.errorMessage = '';
     this.mission = null;
 
+    // Call API to get mission details
     this.spacexapiService
       .getLaunchByFlightNumber(
         flightNumber,
         this.currentMissionName,
         this.currentLaunchYear,
       )
-      .subscribe({
+      .subscribe({  // Success
         next: (mission) => {
           this.mission = mission;
           this.isLoading = false;
           this.changeDetectorRef.detectChanges();
         },
-        error: () => {
+        error: () => {  // Error, clear mission and show error message
           this.mission = null;
           this.errorMessage = 'Unable to load mission details right now.';
           this.isLoading = false;
