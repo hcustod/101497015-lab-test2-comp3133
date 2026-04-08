@@ -1,12 +1,13 @@
 # 101497015-lab-test2-comp3133
 
-COMP3133 Angular lab app using the SpaceX REST API.
+This is an application for COMP3133. 
+It is an Angular app which displays SpaceX Missions using the SpaceX REST API.
 
 ## Features
 
-- View SpaceX missions
-- Filter missions by launch year
-- View mission details
+- View SpaceX missions.
+- Filter missions by launch year.
+- View mission details.
 
 ## Run
 
