@@ -1,38 +1,56 @@
 .list-shell {
-  border-radius: 20px;
+  background: #14213d;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
 }
 
-app-missionfilter,
-.mission-grid,
-.state-block {
-  margin-top: 16px;
+.list-header {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.list-header-copy {
+  width: 100%;
+}
+
+app-missionfilter {
+  display: block;
+  margin-top: 22px;
 }
 
 .state-block {
+  margin-top: 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 32px 0;
+  padding: 40px 0;
   text-align: center;
-  color: #44546a;
+  color: #cbd5e1;
 }
 
 .mission-grid {
+  margin-top: 22px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
 }
 
 .empty-state {
   grid-column: 1 / -1;
   margin: 0;
   text-align: center;
+  color: #f8fafc;
 }
 
 .mission-card {
   height: 100%;
-  border-radius: 16px;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 12px;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease;
@@ -40,11 +58,12 @@ app-missionfilter,
 
 .mission-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .mission-avatar {
-  background: #e8eef9;
+  background: #334155;
+  border: 1px solid #475569;
   overflow: hidden;
 }
 
@@ -54,7 +73,34 @@ app-missionfilter,
   object-fit: contain;
 }
 
+.mission-card .mat-mdc-card-title {
+  color: #f8fafc;
+  letter-spacing: 0.02em;
+}
+
+.mission-card .mat-mdc-card-subtitle {
+  color: #cbd5e1;
+}
+
+.mission-card .mat-mdc-card-content p {
+  color: #facc15;
+}
+
+.mission-card .mat-mdc-card-content p strong {
+  color: #ffffff;
+}
+
 .details-text {
-  line-height: 1.5;
-  color: #44546a;
+  line-height: 1.65;
+  color: #cbd5e1 !important;
+}
+
+.mission-card .mat-mdc-card-actions {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid #334155;
+}
+
+.mission-card .mat-mdc-card-actions a[mat-button] {
+  color: #93c5fd;
 }

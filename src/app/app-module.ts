@@ -2,7 +2,7 @@ import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,13 +15,15 @@ import { App } from './app';
 import { Missionlist } from './missionlist/missionlist';
 import { Missionfilter } from './missionfilter/missionfilter';
 import { Missiondetails } from './missiondetails/missiondetails';
+import { TextFallbackPipe } from './pipes/text-fallback.pipe';
 
 @NgModule({
-  declarations: [App, Missionlist, Missionfilter, Missiondetails],
+  declarations: [App, Missionlist, Missionfilter, Missiondetails, TextFallbackPipe],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,  // deprecated? 
-    HttpClientModule,         //deprecated?
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatButtonModule,

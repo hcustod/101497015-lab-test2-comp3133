@@ -1,11 +1,49 @@
+.mat-mdc-card {
+  background: #14213d;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mat-mdc-card-title {
+  color: #f8fafc;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .filter-actions {
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 16px;
 }
 
 .filter-field {
   flex: 1;
+}
+
+button[mat-stroked-button] {
+  background: rgba(76, 118, 170, 0.18);
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  background: #1e293b;
+}
+
+:host ::ng-deep .mdc-notched-outline__leading,
+:host ::ng-deep .mdc-notched-outline__notch,
+:host ::ng-deep .mdc-notched-outline__trailing {
+  border-color: #475569 !important;
+}
+
+:host ::ng-deep .mat-mdc-select-value,
+:host ::ng-deep .mat-mdc-form-field-label {
+  color: #f8fafc !important;
 }
 
 @media (max-width: 640px) {

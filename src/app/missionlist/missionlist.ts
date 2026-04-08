@@ -28,12 +28,6 @@ export class Missionlist implements OnInit {
     this.loadCurrentMissions();
   }
 
-  // Load missions
-  loadMissions(): void {
-    this.selectedYear = '';
-    this.loadCurrentMissions();
-  }
-
   // Retry loading missions after error
   retryLoad(): void {
     this.loadCurrentMissions();
@@ -45,9 +39,16 @@ export class Missionlist implements OnInit {
     this.loadCurrentMissions();
   }
 
-  // TrackBy func for mission list to optimize rendering
-  trackByFlightNumber(_index: number, mission: Mission): number {
-    return mission.flight_number;
+  get viewState(): 'loading' | 'error' | 'ready' {
+    if (this.isLoading) {
+      return 'loading';
+    }
+
+    if (this.errorMessage) {
+      return 'error';
+    }
+
+    return 'ready';
   }
 
   // Load missions based on selected year or all if no year selected
